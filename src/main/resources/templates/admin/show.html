@@ -1,0 +1,101 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http:thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--    <title>All Users</title>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark d-flex justify-content-between">-->
+<!--    <span>-->
+<!--    <span class="navbar-brand font-weight-bold" th:text="${user.getEmail()}">VALUE</span>-->
+<!--    <span class="navbar-brand font-weight-regular"> with roles:</span>-->
+<!--    <span class="navbar-brand font-weight-regular">ADMIN USER</span>-->
+<!--    </span>-->
+<!--    <ul class="navbar-nav">-->
+<!--        <li class="nav-item text-nowrap">-->
+<!--            <a class="nav-link" href="/logout">Logout</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<!--<div class="d-flex flex-row ">-->
+<!--    <div class="nav flex-column nav-pills w-25 mt-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
+<!--        <a class="nav-link" href="/admin/users">Admin</a>-->
+<!--        <a class="nav-link active" href="#">User</a>-->
+<!--    </div>-->
+
+<!--    <div class="bg-light w-100 pr-4 ">-->
+<!--        <h1 class="m-3">-->
+<!--            User information page-->
+<!--        </h1>-->
+
+<!--        <div class="border ml-3 b">-->
+<!--            <h4 class="d-flex ml-4 ">About user</h4>-->
+<!--        </div>-->
+
+<!--        <div class="bg-white ml-3 pr-4 border">-->
+<!--            <table class="table table-striped bg-white ml-3 mt-3">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>ID</th>-->
+<!--                    <th>First Name</th>-->
+<!--                    <th>Last Name</th>-->
+<!--                    <th>Age</th>-->
+<!--                    <th>Email</th>-->
+<!--                    <th>Role</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <td th:text="${user.getId()}"></td>-->
+<!--                    <td th:text="${user.getUsername()}"></td>-->
+<!--                    <td th:text="${user.getLastname()}"></td>-->
+<!--                    <td th:text="${user.getAge()}"></td>-->
+<!--                    <td th:text="${user.getEmail()}"></td>-->
+<!--                    <td>-->
+<!--                        <div th:each="role : ${user.getRoles()}">-->
+<!--                        <span class="text-uppercase"-->
+<!--                              th:text="${role.toString()}"></span>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
+<!--        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"-->
+<!--        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http:thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>User</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<p th:text="${user.toString()}">VALUE</p>-->
+
+<!--<a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}">Edit</a>-->
+
+<!--<form th:method="GET" th:action="@{/admin/users/delete/{id}(id=${user.getId()})}">-->
+<!--    <input type="submit" value="Delete"/>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
