@@ -1,6 +1,8 @@
 package mygroup.Task_311.model;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -34,9 +36,10 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private List<Role> roleList;
 
     public User() {
@@ -58,11 +61,11 @@ public class User implements UserDetails {
         this.lastname = lastname;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -134,7 +137,7 @@ public class User implements UserDetails {
 //        roles.add(r);
 //    }
 
-    public User(Long id, String username, String password, String email){
+    public User(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -142,8 +145,8 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "User " + this.getId() + "\n"
-                + this.getUsername()+"\n" + this.getEmail();
+                + this.getUsername() + "\n" + this.getEmail();
     }
 }

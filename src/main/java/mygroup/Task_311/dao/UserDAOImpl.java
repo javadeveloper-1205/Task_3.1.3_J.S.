@@ -1,10 +1,15 @@
 package mygroup.Task_311.dao;
 
+
 import mygroup.Task_311.model.User;
 import org.springframework.stereotype.Component;
+
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -28,7 +33,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public void edit(User user) {
+
         entityManager.merge(user);
+
     }
 
     public User getById(long id) {
@@ -40,6 +47,22 @@ public class UserDAOImpl implements UserDAO {
         return (User) entityManager.createQuery("from User where username = :username")
                 .setParameter("username", username)
                 .getSingleResult();
-//        return entityManager.find(User.class, username);
+    }
+
+    @Override
+    @Transactional
+    public void saveUserDao(User user) {
+        User newUser = entityManager.merge(user);
+        entityManager.persist(newUser);
+    }
+
+    @Override
+    public Optional<User> findUserByUsernameOptional(String username) {
+        User user = new User();
+        try {
+            user = (User) entityManager.createQuery("FROM User u WHERE u.username=:username").setParameter("username", username).getSingleResult();
+        } catch (Exception E) {
+        }
+        return Optional.ofNullable(user);
     }
 }

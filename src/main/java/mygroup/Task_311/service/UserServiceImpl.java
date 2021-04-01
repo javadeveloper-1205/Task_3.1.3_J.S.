@@ -12,25 +12,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
 
     @Autowired
-    public void setUserDAO(UserDAO userDAO){
+    public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
     @Autowired
     private RoleDAOImpl roleDAO;
 
-    //@Transactional
     public List<User> allUsers() {
         return userDAO.allUsers();
     }
@@ -45,20 +41,24 @@ public class UserServiceImpl implements UserService{
         userDAO.delete(id);
     }
 
-    @Transactional
     public void edit(User user) {
         userDAO.edit(user);
     }
 
+    @Override
     @Transactional
+    public void editUser(User user) {
+        userDAO.saveUserDao(user);
+    }
+
     public User getById(long id) {
         return userDAO.getById(id);
     }
 
-    @Transactional
-    public User findUserByUsername(String username){
+    public User findUserByUsername(String username) {
         return userDAO.findByUsername(username);
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDAO.findByUsername(username);
@@ -69,11 +69,17 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
-     public void updateRoleList(User user) {
+    public void updateRoleList(User user) {
         List<Role> roleList = new ArrayList<>();
         for (Role role : user.getRoles()) {
             roleList.add(roleDAO.findRoleByName(role.getRole()));
         }
         user.setRoles(roleList);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        Optional<User> user = userDAO.findUserByUsernameOptional(username);
+        return user.get();
     }
 }

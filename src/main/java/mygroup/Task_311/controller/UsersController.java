@@ -86,7 +86,7 @@ public class UsersController {
             roleSet.add(roleService.findRoleByName(role));
         }
         user.setRoles(roleSet);
-        userService.edit(user);
+        userService.editUser(user);
         return "redirect:/admin/users";
     }
 
@@ -96,12 +96,12 @@ public class UsersController {
         return "redirect:/admin/users";
     }
 
-//
-//    @RequestMapping("/user")
-//    public String dashboardPageList(Model model, @AuthenticationPrincipal UserDetails currentUser ) {
-//        User user = userService.findUserByUsername(currentUser.getUsername());
-//        model.addAttribute("user", user);
-//        model.addAttribute("userRoles", roleService.getById(user.getId()));
-//        return "user";
-//    }
+
+    @RequestMapping("/user")
+    public String dashboardPageList(Model model, @AuthenticationPrincipal UserDetails currentUser ) {
+        User user = userService.findUserByUsername(currentUser.getUsername());
+        model.addAttribute("user", user);
+        model.addAttribute("userRoles", roleService.getById(user.getId()));
+        return "user";
+    }
 }

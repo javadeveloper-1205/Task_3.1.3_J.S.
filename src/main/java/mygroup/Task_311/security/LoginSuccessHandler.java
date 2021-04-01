@@ -1,4 +1,4 @@
-package mygroup.Task_311.config.handler;
+package mygroup.Task_311.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

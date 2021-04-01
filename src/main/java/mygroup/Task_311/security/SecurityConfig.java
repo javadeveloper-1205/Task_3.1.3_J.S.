@@ -1,9 +1,7 @@
-package mygroup.Task_311.config;
+package mygroup.Task_311.security;
 
-import mygroup.Task_311.config.handler.LoginSuccessHandler;
 import mygroup.Task_311.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -134,7 +134,7 @@ userData['roles'].push({role: this.value, id: this.value == "ROLE_ADMIN" ? 1 : 2
 console.log(userData)
 
     $.ajax({
-        url: `/api/users/` + userData.id,
+        url: `/api/users/edit`,
         type: 'put',
         data: JSON.stringify(userData),
         dataType: 'json',

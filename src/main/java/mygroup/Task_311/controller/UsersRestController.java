@@ -55,20 +55,11 @@ public class UsersRestController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<List<User>> editUser(@PathVariable Long id, @RequestBody User userUpdated){
-        User user = userService.getById(id);
-        user.setUsername(userUpdated.getUsername());
-        user.setLastname(userUpdated.getLastname());
-        user.setAge(userUpdated.getAge());
-        user.setEmail(userUpdated.getEmail());
-        user.setPassword(userUpdated.getPassword());
-
-        user.setRoles(userUpdated.getRoles());
-        userService.updateRoleList(user);
-        userService.edit(user);
-
+    @PutMapping("/edit")
+    public ResponseEntity<?> update(@RequestBody User user) {
+        userService.editUser(user);
         return ResponseEntity.ok(userService.allUsers());
+
     }
 
     @DeleteMapping("/{id}")
