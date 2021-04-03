@@ -51,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     @Transactional
-    public void saveUserDao(User user) {
+    public void editUser(User user) {
         User newUser = entityManager.merge(user);
         entityManager.persist(newUser);
     }
@@ -60,7 +60,7 @@ public class UserDAOImpl implements UserDAO {
     public Optional<User> findUserByUsernameOptional(String username) {
         User user = new User();
         try {
-            user = (User) entityManager.createQuery("FROM User u WHERE u.username=:username").setParameter("username", username).getSingleResult();
+            user = entityManager.createQuery("FROM User u WHERE u.username=:username", User.class).setParameter("username", username).getSingleResult();
         } catch (Exception E) {
         }
         return Optional.ofNullable(user);

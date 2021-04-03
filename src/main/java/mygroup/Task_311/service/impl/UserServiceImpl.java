@@ -1,12 +1,10 @@
-package mygroup.Task_311.service;
+package mygroup.Task_311.service.impl;
 
 import mygroup.Task_311.dao.RoleDAOImpl;
 import mygroup.Task_311.dao.UserDAO;
-import mygroup.Task_311.model.Role;
 import mygroup.Task_311.model.User;
+import mygroup.Task_311.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,38 +46,33 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void editUser(User user) {
-        userDAO.saveUserDao(user);
+        userDAO.editUser(user);
     }
 
     public User getById(long id) {
         return userDAO.getById(id);
     }
 
-    public User findUserByUsername(String username) {
-        return userDAO.findByUsername(username);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDAO.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user;
-    }
-
-    public void updateRoleList(User user) {
-        List<Role> roleList = new ArrayList<>();
-        for (Role role : user.getRoles()) {
-            roleList.add(roleDAO.findRoleByName(role.getRole()));
-        }
-        user.setRoles(roleList);
-    }
-
     @Override
     public User getUserByUsername(String username) {
         Optional<User> user = userDAO.findUserByUsernameOptional(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
         return user.get();
     }
+
+//    @Override
+//    @Transactional
+//    public Set<Role> authorities(String[] roleNames) {
+//        Set<Role> roleSet = roleDao.findRolesByRoleNames(roleNames);
+//        System.out.println(roleSet);
+//        return roleSet;
+//    }
+//
+//    @Override
+//    public Set<Role> getAllRoles() {
+//        Set<Role> role = roleDao.findAllRoles();
+//        return role;
+//    }
 }

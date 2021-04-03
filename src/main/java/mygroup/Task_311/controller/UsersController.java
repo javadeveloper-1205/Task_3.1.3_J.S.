@@ -9,14 +9,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class UsersController {
@@ -39,7 +36,7 @@ public class UsersController {
     public String allUsers(Model model, @AuthenticationPrincipal UserDetails currentUser){
         model.addAttribute("roles", roleService.listRoles());
         model.addAttribute("users", userService.allUsers());
-        User user = userService.findUserByUsername(currentUser.getUsername());
+        User user = userService.getUserByUsername(currentUser.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("userRoles", roleService.getById(user.getId()));
         return "admin/allUsers";
@@ -55,7 +52,7 @@ public class UsersController {
     public String newUser(Model model, @AuthenticationPrincipal UserDetails currentUser){
         model.addAttribute("user", new User());
         model.addAttribute("allRoles", roleService.listRoles());
-        User user = userService.findUserByUsername(currentUser.getUsername());
+        User user = userService.getUserByUsername(currentUser.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("userRoles", roleService.getById(user.getId()));
         return "admin/new";
@@ -99,7 +96,7 @@ public class UsersController {
 
     @RequestMapping("/user")
     public String dashboardPageList(Model model, @AuthenticationPrincipal UserDetails currentUser ) {
-        User user = userService.findUserByUsername(currentUser.getUsername());
+        User user = userService.getUserByUsername(currentUser.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("userRoles", roleService.getById(user.getId()));
         return "user";

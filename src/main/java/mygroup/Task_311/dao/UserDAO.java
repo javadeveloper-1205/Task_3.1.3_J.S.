@@ -16,7 +16,7 @@ public interface UserDAO {
 
     void edit(User user);
 
-    void saveUserDao(User user);
+    void editUser(User user);
 
     User getById(long id);
 

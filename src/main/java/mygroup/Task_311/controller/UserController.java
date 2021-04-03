@@ -32,7 +32,7 @@ public class UserController {
 
     @GetMapping
     public String dashboardPageList(Model model, @AuthenticationPrincipal UserDetails currentUser ) {
-        User user = userService.findUserByUsername(currentUser.getUsername());
+        User user = userService.getUserByUsername(currentUser.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("userRoles", roleService.getById(user.getId()));
         return "user";

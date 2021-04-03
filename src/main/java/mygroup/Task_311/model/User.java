@@ -128,15 +128,6 @@ public class User implements UserDetails {
         this.roleList = roleList;
     }
 
-//    public void setRole(String role){
-//        Role r = new Role();
-//        r.setRole(role);
-//        if (roles == null) {
-//            this.roles = new HashSet<>();
-//        }
-//        roles.add(r);
-//    }
-
     public User(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
